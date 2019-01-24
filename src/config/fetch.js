@@ -17,7 +17,6 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 			url = url + '?' + dataStr;
 		}
 	}
-
 	if (window.fetch && method == 'fetch') {
 		let requestConfig = {
 			credentials: 'include',
@@ -27,7 +26,7 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 				'Content-Type': 'application/json'
 			},
 			mode: "cors",
-			cache: "force-cache"
+			// cache: "force-cache"
 		}
 
 		if (type == 'POST') {
@@ -37,8 +36,10 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 		}
 		
 		try {
+
 			const response = await fetch(url, requestConfig);
 			const responseJson = await response.json();
+			console.log(response,">>>>>>>>>>>>>>>",responseJson)
 			return responseJson
 		} catch (error) {
 			throw new Error(error)
@@ -58,7 +59,7 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 			}
 
 			requestObj.open(type, url, true);
-			requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			requestObj.setRequestHeader("Content-type", "application/json");
 			requestObj.send(sendData);
 
 			requestObj.onreadystatechange = () => {

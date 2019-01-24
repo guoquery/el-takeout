@@ -3,6 +3,10 @@ import vueRouter from 'vue-router'
 import {routerMode} from '../config/env'
 import HelloWorld from '@/components/HelloWorld'
 const home  = () =>import('@/pages/home/home.vue')
+const location  = () =>import('@/pages/location/location.vue')
+const city  = () =>import('@/pages/city/city.vue')
+const msite  = () =>import('@/pages/msite/msite.vue')
+const shop  = () =>import('@/pages/shop/shop.vue')
 
 Vue.use(vueRouter)
 
@@ -26,15 +30,58 @@ const router = new vueRouter({
       redirect:'/home'
     },
     {
+      path:'/location',
+      component:location,
+    },
+    {
       path: '/home',
-      name: 'home',
+      name: 'location',
       component: home,
       beforeEnter: (to, from, next) => {
-        console.log('beforEnter',to,from)
+        console.log('homebeforEnter',to,from)
         next();
         // ...
       }
     },
+    //选择城市
+    {
+      path: '/city/:cityid',
+      name: 'city',
+      component: city,
+      beforeEnter: (to, from, next) => {
+        console.log('citybeforEnter',to,from)
+        next();
+        // ...
+      }
+    },
+    //所有商铺列表页
+    {
+      path: '/msite',
+      name:'msite',
+      component: msite,
+      meta: { keepAlive: true },
+      beforeEnter: (to, from, next) => {
+        console.log('msitebeforEnter',to,from)
+        next();
+        // ...
+      }
+    },
+    //商铺详情页
+    {
+      path: '/shop',
+      component: shop,
+      // children: [{
+      //     path: 'foodDetail', //食品详情页
+      //     component: foodDetail,
+      // }, {
+      //     path: 'shopDetail', //商铺详情页
+      //     component: shopDetail,
+      //     children: [{
+      //         path: 'shopSafe', //商铺安全认证页
+      //         component: shopSafe,
+      //     }, ]
+      // }]
+  },
   ]
 })
 /**

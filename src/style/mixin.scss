@@ -46,7 +46,7 @@ $fc:#fff;
 }
 
 //宽高
-@mixin wh($width, $height){
+@mixin wh($width, $height:$width){
 	width: $width;
 	height: $height;
 }
@@ -57,7 +57,7 @@ $fc:#fff;
 }
 
 //字体大小，颜色
-@mixin sc($size, $color){
+@mixin sc($size, $color:#fff){
 	font-size: $size;
 	color: $color;
 }
@@ -66,5 +66,13 @@ $fc:#fff;
 @mixin fj($type: space-between){
 	display: flex;
 	justify-content: $type;
+
+}
+//flex 布局和 子元素 对其方式
+@mixin fdaj($direction:'row',$type: space-between,$item:center){
+	display: flex;
+	flex-direction: $direction;
+	justify-content: $type;
+	align-items: $item;
 
 }
